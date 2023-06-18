@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from schemas.mock import MockInput
-from models.mock import Mock as MockModel
 from config.database import SessionLocal
 from sqlalchemy.orm import Session
 from services.mock import MockService
@@ -30,3 +29,9 @@ def create(input: MockInput, db: Session = Depends(get_db)):
 def get_all(db: Session = Depends(get_db)):
     mocks = MockService(db).get_all()
     return JSONResponse(status_code=200, content=jsonable_encoder(mocks))
+
+
+@mock_router.get("/mock/{endpoint}")
+def get(endpoint: str, db: Session = Depends(get_db)):
+    mock = MockService(db).get(endpoint)
+    return JSONResponse(status_code=200, content=jsonable_encoder(mock))
