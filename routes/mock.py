@@ -38,5 +38,4 @@ def get_all(db: Session = Depends(get_db)):
 def get(endpoint: str, db: Session = Depends(get_db)):
     mock = MockService(db).get(endpoint)
     response = json.loads(mock.response)
-    print("hasdsad")
     return JSONResponse(status_code=200, content=jsonable_encoder(response))
