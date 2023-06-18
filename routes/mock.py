@@ -5,6 +5,7 @@ from schemas.mock import MockInput
 from config.database import SessionLocal
 from sqlalchemy.orm import Session
 from services.mock import MockService
+from services.gpt import get_response
 
 mock_router = APIRouter()
 
@@ -21,7 +22,8 @@ def get_db():
 
 @mock_router.post("/mock")
 def create(input: MockInput, db: Session = Depends(get_db)):
-    MockService(db).create(input)
+    response = get_response(input.prompt)
+    MockService(db).create(input, response)
     return JSONResponse(status_code=201, content={"message": "Mock creado con éxito"})
 
 

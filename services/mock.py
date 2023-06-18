@@ -14,7 +14,11 @@ class MockService:
             MockModel.endpoint == endpoint).first()
         return mock
 
-    def create(self, mock):
-        self.db.add(MockModel(**mock.dict()))
+    def create(self, mock, response):
+        self.db.add(MockModel(
+            endpoint=mock.endpoint,
+            prompt=mock.prompt,
+            response=response
+        ))
         self.db.commit()
         return
