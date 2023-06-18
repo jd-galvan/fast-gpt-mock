@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class CreateInput(BaseModel):
+class MockInput(BaseModel):
     endpoint: str
     prompt: str
 
