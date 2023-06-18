@@ -5,6 +5,7 @@ from schemas.mock import MockInput
 from models.mock import Mock as MockModel
 from config.database import SessionLocal
 from sqlalchemy.orm import Session
+from services.mock import MockService
 
 mock_router = APIRouter()
 
@@ -21,12 +22,11 @@ def get_db():
 
 @mock_router.post("/mock")
 def create(input: MockInput, db: Session = Depends(get_db)):
-    db.add(MockModel(**input.dict()))
-    db.commit()
+    MockService(db).create(input)
     return JSONResponse(status_code=201, content={"message": "Mock creado con éxito"})
 
 
 @mock_router.get("/mock")
 def get_all(db: Session = Depends(get_db)):
-    mocks = db.query(MockModel).all()
+    mocks = MockService(db).get_all()
     return JSONResponse(status_code=200, content=jsonable_encoder(mocks))

@@ -7,4 +7,4 @@ class Mock(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     endpoint = Column(String, index=True)
-    prompt = Column(String, index=True)
+    prompt = Column(String)
