@@ -21,20 +21,20 @@ def get_db():
         db.close()
 
 
-@mock_router.post("/mock")
+@mock_router.post("/mock", tags=["mocks"])
 def create(input: MockInput, db: Session = Depends(get_db)):
     response = get_response(input.prompt)
     MockService(db).create(input, response)
     return JSONResponse(status_code=201, content={"message": "Mock creado con éxito"})
 
 
-@mock_router.get("/mock")
+@mock_router.get("/mock", tags=["mocks"])
 def get_all(db: Session = Depends(get_db)):
     mocks = MockService(db).get_all()
     return JSONResponse(status_code=200, content=jsonable_encoder(mocks))
 
 
-@mock_router.get("/mock/{endpoint}")
+@mock_router.get("/mock/{endpoint}", tags=["mocks"])
 def get(endpoint: str, db: Session = Depends(get_db)):
     mock = MockService(db).get(endpoint)
     response = json.loads(mock.response)
