@@ -40,8 +40,10 @@ Set your environment variables
 
 | Variable | Description |
 | ------ | ------ |
-| DB_CONNECTION_STRING | Database connection string compatible with SQLAlchemy |
+| DB_CONNECTION_STRING* | Database connection string compatible with SQLAlchemy |
 | GPT_API_KEY | OpenAI Apikey |
+
+*You can use sqlite, setting: "sqlite:///./database.sqlite"
 
 Start the app
 
