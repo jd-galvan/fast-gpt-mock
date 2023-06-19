@@ -11,6 +11,9 @@ python-dotenv = "*"
 openai = "*"
 
 [dev-packages]
+httpx = "*"
+pytest = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.11"
