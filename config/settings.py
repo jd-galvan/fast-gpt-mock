@@ -1,12 +1,12 @@
-from pydantic import BaseSettings
+from pydantic import BaseSettings, Field
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Settings(BaseSettings):
-    db_connection_string: str
-    gpt_api_key: str
-
-    class Config:
-        env_file = '.env'
+    db_connection_string: str = Field(..., env="DB_CONNECTION_STRING")
+    gpt_api_key: str = Field(..., env="GPT_API_KEY")
 
 
 settings = Settings()
